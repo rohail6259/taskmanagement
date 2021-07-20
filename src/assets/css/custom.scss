@@ -1,0 +1,53 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "DM Sans", sans-serif;
+}
+
+a {
+    text-decoration: none;
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+// TYPOGRAPHY
+h1 {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 31.25px;
+}
+h2 {
+    font-size: 21px;
+    font-weight: 500;
+    line-height: 27.34px;
+}
+h3 {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+}
+h6 {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+// DASHBOARD PAGE
+.dashboard {
+    .mentors {
+        .picture {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 100%;
+        }
+        &:hover {
+            background-color: rgba(211, 211, 211, 0.2);
+            border-radius: 12px;
+        }
+    }
+}
