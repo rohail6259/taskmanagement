@@ -6,6 +6,7 @@ import ProtectedRoute from "./Components/Global/ProtectedRoute";
 import SignUp from "./Pages/SignUp";
 import Login from "./Pages/Login";
 import Dashboard from "./Pages/Dashboard";
+import NavbarHOC from "./Components/Global/NavbarHOC";
 
 const App = () => {
     // REACT USEREDUCER - REDUX PATTERN
@@ -13,15 +14,16 @@ const App = () => {
 
     useEffect(() => {
         let userId = localStorage.getItem("userId");
-        setTimeout(() => {
-            if (userId !== null)
-                dispatch({ type: "GET_USER_INFO", payload: { id: userId } });
-        }, 1000);
+        if (userId !== null)
+            dispatch({ type: "GET_USER_INFO", payload: { id: userId } });
+
+        dispatch({ type: "GET_TASKS" });
     }, [dispatch]);
 
     return (
         <TMContext.Provider value={{ contextData, dispatch }}>
             <Router>
+                <NavbarHOC />
                 <Switch>
                     <Route path="/signup" component={SignUp} />
                     <Route path="/login" component={Login} />

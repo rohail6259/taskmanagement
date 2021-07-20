@@ -65,3 +65,32 @@ export async function getUserInfo(user, id) {
         if (error.response.status === 400) alert("User not found!");
     }
 }
+
+export async function getTask(tasks) {
+    try {
+        let { data } = await axios.get(
+            `${process.env.REACT_APP_API_URL}/tasks`
+        );
+        if (data) data.forEach((e) => tasks.push(e));
+    } catch (error) {
+        if (error.response.status === 400) alert("Tasks not found!");
+    }
+}
+
+export async function addTask(tasks, taskName) {
+    try {
+        let { data } = await axios.post(
+            `${process.env.REACT_APP_API_URL}/tasks`,
+            {
+                taskName,
+            }
+        );
+        if (data.status === 1) getTask(tasks);
+    } catch (error) {
+        if (error.response.status === 400) alert("Unable to add the task");
+    }
+}
+
+export async function updateTask() {}
+
+export async function deleteTask() {}

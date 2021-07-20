@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useHistory } from "react-router-dom";
-import { Button, InputGroup, Input, Icon } from "rsuite";
 import { TMContext } from "../Service/context/context";
-import Logout from "../Utlis/Logout";
+import NoTask from "../Components/Dashboard/NoTask";
+import AddTask from "../Components/Dashboard/AddTask";
+import TaskList from "../Components/Dashboard/TaskList";
 
 const Dashboard = () => {
     const { contextData } = useContext(TMContext);
     const { tasks } = contextData;
 
-    const history = useHistory();
-
     const [taskData, setTaskData] = useState([]);
+    const [isAddTaskShowing, serIsAddTaskShowing] = useState(false);
 
     useEffect(() => {
         let isDataAvailable = false;
@@ -29,44 +28,27 @@ const Dashboard = () => {
         }
     }, [tasks]);
 
-    const handleSearch = (value) => {
-        let searchedValue = value.toLowerCase();
-        let filteredData = tasks.filter((e) => {
-            return e.title.toLowerCase().search(searchedValue) !== -1;
-        });
-        setTaskData(filteredData);
-    };
+    const handleAddTaskPanel = (value) => serIsAddTaskShowing(value);
 
     return (
         <section className="dashboard">
-            <div className="container-fluid container-lg">
-                <div className="row align-items-center justify-content-center">
-                    <div className="col-12 col-md-8 col-lg-6 col-xl-8">
-                        <div className="col-12">
-                            {/* LOGOUT */}
-                            <Button
-                                className="logout"
-                                appearance="default"
-                                onClick={() => Logout(history)}
-                            >
-                                Logout
-                            </Button>
+            {/* IF NOT TASK AVAILABLE  */}
+            {taskData.length <= 0 && (
+                <NoTask handleAddTaskPanel={handleAddTaskPanel} />
+            )}
 
-                            {/* SEARCH INPUT */}
-                            <InputGroup inside>
-                                <InputGroup.Button>
-                                    <Icon icon="search" />
-                                </InputGroup.Button>
-                                <Input
-                                    placeholder="Search"
-                                    type="search"
-                                    onChange={(value) => handleSearch(value)}
-                                />
-                            </InputGroup>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {/* TASK LIST */}
+            <TaskList
+                tasks={tasks}
+                taskData={taskData}
+                setTaskData={setTaskData}
+                handleAddTaskPanel={handleAddTaskPanel}
+            />
+
+            {/* ADD TASK MODAL */}
+            {isAddTaskShowing && (
+                <AddTask handleAddTaskPanel={handleAddTaskPanel} />
+            )}
         </section>
     );
 };

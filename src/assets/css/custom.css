@@ -5,6 +5,7 @@
 
 body {
   font-family: "DM Sans", sans-serif;
+  background-color: #f4f4f6;
 }
 
 a {
@@ -39,16 +40,102 @@ h6 {
   line-height: 20px;
 }
 
-.dashboard .mentors .picture {
-  width: 50px;
-  height: 50px;
-  -o-object-fit: cover;
-     object-fit: cover;
+.navbar-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  height: 72px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  -webkit-box-shadow: 0px 3px 6px #00000029;
+          box-shadow: 0px 3px 6px #00000029;
+}
+
+.navbar-wrapper .profile-info img {
+  width: 48px;
+  height: 48px;
   border-radius: 100%;
 }
 
-.dashboard .mentors:hover {
-  background-color: rgba(211, 211, 211, 0.2);
+.navbar-wrapper .profile-info p {
+  text-align: left;
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: 0px;
+  color: #6d8187;
+}
+
+.navbar-wrapper .logout {
+  font-size: 18px;
+  letter-spacing: 0px;
+  color: #6d8187;
+}
+
+.dashboard .no-task {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  -webkit-box-shadow: 0px 3px 6px #0000000a;
+          box-shadow: 0px 3px 6px #0000000a;
+  min-width: 320px;
+  min-height: 158px;
   border-radius: 12px;
+}
+
+.dashboard .add-task {
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.dashboard .add-task .panel {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+.dashboard .add-task .panel .overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100vh;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  z-index: 1001;
+}
+
+.dashboard .add-task .panel .task-wrapper {
+  position: absolute;
+  z-index: 1002;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background: #ffffff 0% 0% no-repeat padding-box;
+  -webkit-box-shadow: 0px 3px 6px #0000000a;
+          box-shadow: 0px 3px 6px #0000000a;
+  min-width: 320px;
+  min-height: 158px;
+  border-radius: 12px;
+}
+
+.dashboard .task-list {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  -webkit-box-shadow: 0px 3px 6px #00000014;
+          box-shadow: 0px 3px 6px #00000014;
+  border-radius: 12px;
+  min-height: 100px;
+}
+
+.dashboard .task-list .separator {
+  background-color: #00000014;
+  width: 99%;
+  height: 1px;
+  margin: 0 auto;
 }
 /*# sourceMappingURL=custom.css.map */
