@@ -1,4 +1,5 @@
 import axios from "axios";
+import getToken from "../../Utlis/GetToken";
 
 export async function signup(user, signUpData) {
     try {
@@ -34,7 +35,6 @@ export async function login(user, userInfo) {
         );
         if (data) {
             localStorage.setItem("token", headers["x-auth-token"]);
-            localStorage.setItem("userId", data._id);
             Object.assign(user, {
                 id: data._id,
                 isAuthValid: data.isAuthValid,
@@ -48,10 +48,13 @@ export async function login(user, userInfo) {
     }
 }
 
-export async function getUserInfo(user, id) {
+export async function getUserInfo(user) {
     try {
         let { data } = await axios.get(
-            `${process.env.REACT_APP_API_URL}/user/${id}`
+            `${process.env.REACT_APP_API_URL}/user`,
+            {
+                headers: { "x-auth-token": getToken() },
+            }
         );
         if (data) {
             Object.assign(user, {
@@ -69,7 +72,10 @@ export async function getUserInfo(user, id) {
 export async function getTask(tasks) {
     try {
         let { data } = await axios.get(
-            `${process.env.REACT_APP_API_URL}/tasks`
+            `${process.env.REACT_APP_API_URL}/tasks`,
+            {
+                headers: { "x-auth-token": getToken() },
+            }
         );
         if (data) data.forEach((e) => tasks.push(e));
     } catch (error) {
@@ -81,8 +87,9 @@ export async function addTask(tasks, taskName) {
     try {
         let { data } = await axios.post(
             `${process.env.REACT_APP_API_URL}/tasks`,
+            { taskName },
             {
-                taskName,
+                headers: { "x-auth-token": getToken() },
             }
         );
         if (data.status === 1) getTask(tasks);
@@ -91,6 +98,29 @@ export async function addTask(tasks, taskName) {
     }
 }
 
-export async function updateTask() {}
+export async function updateTask(tasks, id, taskName) {
+    try {
+        let { data } = await axios.put(
+            `${process.env.REACT_APP_API_URL}/tasks/${id}`,
+            {
+                taskName,
+            },
+            {
+                headers: { "x-auth-token": getToken() },
+            }
+        );
+        if (data.status === 1) getTask(tasks);
+    } catch (error) {
+        if (error.response.status === 400) alert("Unable to delete the task");
+    }
+}
 
-export async function deleteTask() {}
+export async function deleteTask(id) {
+    try {
+        await axios.delete(`${process.env.REACT_APP_API_URL}/tasks/${id}`, {
+            headers: { "x-auth-token": getToken() },
+        });
+    } catch (error) {
+        if (error.response.status === 400) alert("Unable to delete the task");
+    }
+}

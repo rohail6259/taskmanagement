@@ -1,7 +1,13 @@
 import React from "react";
 import { InputGroup, Input, Checkbox, Icon, Button } from "rsuite";
 
-const TaskList = ({ tasks, taskData, setTaskData, handleAddTaskPanel }) => {
+const TaskList = ({
+    tasks,
+    taskData,
+    setTaskData,
+    handleAddUpdateTaskPanel,
+    dispatch,
+}) => {
     const navbar = document.querySelector(".navbar-wrapper");
 
     const handleSearch = (value) => {
@@ -10,6 +16,14 @@ const TaskList = ({ tasks, taskData, setTaskData, handleAddTaskPanel }) => {
             return e.taskName.toLowerCase().search(searchedValue) !== -1;
         });
         setTaskData(filteredData);
+    };
+
+    const handleDelete = (id) => {
+        const _tasks = [...taskData];
+        const filteredTask = _tasks.filter((task) => task._id !== id);
+        setTaskData(filteredTask);
+
+        dispatch({ type: "DELETE_TASK", payload: { id } });
     };
 
     return (
@@ -38,7 +52,9 @@ const TaskList = ({ tasks, taskData, setTaskData, handleAddTaskPanel }) => {
                         <Button
                             appearance="primary"
                             block
-                            onClick={() => handleAddTaskPanel(true)}
+                            onClick={() =>
+                                handleAddUpdateTaskPanel(true, "new")
+                            }
                         >
                             + New Task
                         </Button>
@@ -49,17 +65,30 @@ const TaskList = ({ tasks, taskData, setTaskData, handleAddTaskPanel }) => {
                         {taskData.map((task, idx) => (
                             <React.Fragment key={`task-${idx}`}>
                                 <div className="task py-2 px-1 w-100 d-flex align-items-center justify-content-between">
-                                    <Checkbox><span>{task.taskName}</span></Checkbox>
+                                    <Checkbox>
+                                        <span>{task.taskName}</span>
+                                    </Checkbox>
                                     <div className="edit-delete d-flex">
                                         <Button
                                             appearance="link"
                                             className="mr-2"
+                                            onClick={() =>
+                                                handleAddUpdateTaskPanel(
+                                                    true,
+                                                    "update",
+                                                    task._id,
+                                                    task.taskName
+                                                )
+                                            }
                                         >
                                             <Icon icon="edit" />
                                         </Button>
                                         <Button
                                             appearance="link"
                                             className="mr-2"
+                                            onClick={() =>
+                                                handleDelete(task._id)
+                                            }
                                         >
                                             <Icon icon="trash" />
                                         </Button>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "rsuite";
 
-const NoTask = ({ handleAddTaskPanel }) => {
+const NoTask = ({ handleAddUpdateTaskPanel }) => {
     return (
         <div className="container-fluid container-lg">
             <div className="row align-items-center justify-content-center">
@@ -11,7 +11,9 @@ const NoTask = ({ handleAddTaskPanel }) => {
                         <Button
                             appearance="primary"
                             size="lg"
-                            onClick={() => handleAddTaskPanel(true)}
+                            onClick={() =>
+                                handleAddUpdateTaskPanel(true, "new")
+                            }
                         >
                             + New Task
                         </Button>

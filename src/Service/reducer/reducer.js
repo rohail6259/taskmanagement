@@ -23,7 +23,7 @@ export const reducer = (contextData = initialState, { type, payload }) => {
             return { ...contextData, user };
 
         case "GET_USER_INFO":
-            getUserInfo(user, payload.id);
+            getUserInfo(user);
             return { ...contextData, user };
 
         case "GET_TASKS":
@@ -35,12 +35,12 @@ export const reducer = (contextData = initialState, { type, payload }) => {
             return { ...contextData, tasks };
 
         case "UPDATE_TASK":
-            updateTask(payload.taskName);
-            return { ...contextData };
+            updateTask(tasks, payload.id, payload.taskName);
+            return { ...contextData, tasks };
 
         case "DELETE_TASK":
-            deleteTask(tasks, payload.taskName);
-            return { ...contextData, tasks };
+            deleteTask(payload.id);
+            return { ...contextData };
 
         default:
             return contextData;

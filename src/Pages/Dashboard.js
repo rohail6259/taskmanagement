@@ -1,15 +1,21 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { TMContext } from "../Service/context/context";
 import NoTask from "../Components/Dashboard/NoTask";
-import AddTask from "../Components/Dashboard/AddTask";
+import AddUpdateTask from "../Components/Dashboard/AddUpdateTask";
 import TaskList from "../Components/Dashboard/TaskList";
 
 const Dashboard = () => {
-    const { contextData } = useContext(TMContext);
+    const { contextData, dispatch } = useContext(TMContext);
     const { tasks } = contextData;
 
     const [taskData, setTaskData] = useState([]);
-    const [isAddTaskShowing, serIsAddTaskShowing] = useState(false);
+    const [isAddTaskShowing, setIsAddTaskShowing] = useState(false);
+
+    let taskTypeRef = useRef({ type: "new", id: "", title: "" });
+
+    useEffect(() => {
+        dispatch({ type: "GET_TASKS" });
+    }, [dispatch]);
 
     useEffect(() => {
         let isDataAvailable = false;
@@ -28,13 +34,21 @@ const Dashboard = () => {
         }
     }, [tasks]);
 
-    const handleAddTaskPanel = (value) => serIsAddTaskShowing(value);
+    const handleAddUpdateTaskPanel = (
+        value,
+        type = "new",
+        id = "",
+        title = ""
+    ) => {
+        setIsAddTaskShowing(value);
+        taskTypeRef.current = { type, id, title };
+    };
 
     return (
         <section className="dashboard">
             {/* IF NOT TASK AVAILABLE  */}
             {taskData.length <= 0 && (
-                <NoTask handleAddTaskPanel={handleAddTaskPanel} />
+                <NoTask handleAddUpdateTaskPanel={handleAddUpdateTaskPanel} />
             )}
 
             {/* TASK LIST */}
@@ -42,12 +56,16 @@ const Dashboard = () => {
                 tasks={tasks}
                 taskData={taskData}
                 setTaskData={setTaskData}
-                handleAddTaskPanel={handleAddTaskPanel}
+                handleAddUpdateTaskPanel={handleAddUpdateTaskPanel}
+                dispatch={dispatch}
             />
 
             {/* ADD TASK MODAL */}
             {isAddTaskShowing && (
-                <AddTask handleAddTaskPanel={handleAddTaskPanel} />
+                <AddUpdateTask
+                    taskType={taskTypeRef.current}
+                    handleAddUpdateTaskPanel={handleAddUpdateTaskPanel}
+                />
             )}
         </section>
     );

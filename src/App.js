@@ -13,12 +13,12 @@ const App = () => {
     const [contextData, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
-        let userId = localStorage.getItem("userId");
-        if (userId !== null)
-            dispatch({ type: "GET_USER_INFO", payload: { id: userId } });
-
-        dispatch({ type: "GET_TASKS" });
-    }, [dispatch]);
+        let token = localStorage.getItem("token");
+        if (token !== null) {
+            dispatch({ type: "GET_USER_INFO" });
+            dispatch({ type: "GET_TASKS" });
+        }
+    }, []);
 
     return (
         <TMContext.Provider value={{ contextData, dispatch }}>
