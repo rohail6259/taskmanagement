@@ -47,7 +47,7 @@ const Dashboard = () => {
     return (
         <section className="dashboard">
             {/* IF NOT TASK AVAILABLE  */}
-            {taskData.length <= 0 && (
+            {tasks.length <= 0 && (
                 <NoTask handleAddUpdateTaskPanel={handleAddUpdateTaskPanel} />
             )}
 

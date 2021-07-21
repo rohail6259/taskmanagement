@@ -62,7 +62,8 @@ const TaskList = ({
                 </div>
                 <div className="col-12 col-md-10">
                     <div className="task-list p-4">
-                        {taskData.map((task, idx) => (
+                        {taskData.length <= 0 && <h2 className="text-center">No match found!</h2>}
+                        {taskData.length > 0 && taskData.map((task, idx) => (
                             <React.Fragment key={`task-${idx}`}>
                                 <div className="task py-2 px-1 w-100 d-flex align-items-center justify-content-between">
                                     <Checkbox>
