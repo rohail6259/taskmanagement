@@ -1,22 +1,17 @@
-# Task Management App with Create React App
+# Task Management React App - Client-Side
 
-## Available Scripts
+## Please follow step 1 & 2 to run the project 
 
-In the project directory, you can run:
+### `Step 1: npm install`
 
-### `npm install`
+Run npm install in your terminal to install Node Modules.
 
-Install Node Modules.
+### `Step 2: npm start`
 
-### `npm start`
+Run npm start in your terimanl to run the project.
+Open this link [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm run build`
+### `Step 3: npm run build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
