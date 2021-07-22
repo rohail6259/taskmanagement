@@ -111,15 +111,37 @@ export async function updateTask(tasks, id, taskName) {
         );
         if (data.status === 1) getTask(tasks);
     } catch (error) {
-        if (error.response.status === 400) alert("Unable to delete the task");
+        if (error.response.status === 400) alert("Unable to update the task");
     }
 }
 
-export async function deleteTask(id) {
+export async function updateTaskStatus(tasks, id, status) {
     try {
-        await axios.delete(`${process.env.REACT_APP_API_URL}/tasks/${id}`, {
-            headers: { "x-auth-token": getToken() },
-        });
+        let { data } = await axios.put(
+            `${process.env.REACT_APP_API_URL}/tasks/${id}`,
+            {
+                status,
+            },
+            {
+                headers: { "x-auth-token": getToken() },
+            }
+        );
+        if (data.status === 1) getTask(tasks);
+    } catch (error) {
+        if (error.response.status === 400)
+            alert("Unable to update the task status");
+    }
+}
+
+export async function deleteTask(tasks, id) {
+    try {
+        let { data } = await axios.delete(
+            `${process.env.REACT_APP_API_URL}/tasks/${id}`,
+            {
+                headers: { "x-auth-token": getToken() },
+            }
+        );
+        if (data.status === 1) getTask(tasks);
     } catch (error) {
         if (error.response.status === 400) alert("Unable to delete the task");
     }

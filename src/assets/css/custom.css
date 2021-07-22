@@ -71,6 +71,19 @@ h6 {
   color: #6d8187;
 }
 
+.panels {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  -webkit-box-shadow: 0px 3px 6px #00000014;
+          box-shadow: 0px 3px 6px #00000014;
+  border-radius: 12px;
+  min-height: 100px;
+}
+
+span.completed {
+  text-decoration: line-through;
+  color: #537178 !important;
+}
+
 .dashboard .no-task {
   background: #ffffff 0% 0% no-repeat padding-box;
   -webkit-box-shadow: 0px 3px 6px #0000000a;
@@ -81,7 +94,7 @@ h6 {
 }
 
 .dashboard .add-task {
-  position: absolute;
+  position: fixed;
   z-index: 1000;
   top: 0;
   left: 0;
@@ -96,6 +109,10 @@ h6 {
   left: 0;
   width: 100%;
   height: 100vh;
+  -webkit-box-shadow: 0px 3px 6px #00000014;
+          box-shadow: 0px 3px 6px #00000014;
+  border-radius: 12px;
+  min-height: 100px;
 }
 
 .dashboard .add-task .panel .overlay {
@@ -124,12 +141,9 @@ h6 {
   border-radius: 12px;
 }
 
-.dashboard .task-list {
-  background: #ffffff 0% 0% no-repeat padding-box;
-  -webkit-box-shadow: 0px 3px 6px #00000014;
-          box-shadow: 0px 3px 6px #00000014;
-  border-radius: 12px;
-  min-height: 100px;
+.dashboard .task-list .task span {
+  color: #5285ec;
+  font-size: 18px;
 }
 
 .dashboard .task-list .separator {
@@ -137,5 +151,24 @@ h6 {
   width: 99%;
   height: 1px;
   margin: 0 auto;
+}
+
+.dashboard .info-wrapper {
+  min-height: 17em;
+}
+
+.dashboard .info-wrapper .total-completed .done {
+  color: #5285ec;
+  font-size: 35px;
+}
+
+.dashboard .info-wrapper .total-completed .total {
+  color: #8f9ea2;
+  font-size: 20px;
+}
+
+.dashboard .info-wrapper ul {
+  color: #8f9ea2;
+  font-size: 18px;
 }
 /*# sourceMappingURL=custom.css.map */

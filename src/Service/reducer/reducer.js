@@ -7,6 +7,7 @@ import {
     addTask,
     updateTask,
     deleteTask,
+    updateTaskStatus
 } from "../actions/actions";
 
 export const reducer = (contextData = initialState, { type, payload }) => {
@@ -38,8 +39,12 @@ export const reducer = (contextData = initialState, { type, payload }) => {
             updateTask(tasks, payload.id, payload.taskName);
             return { ...contextData, tasks };
 
+        case "UPDATE_TASK_STATUS":
+            updateTaskStatus(tasks, payload.id, payload.status);
+            return { ...contextData, tasks };
+
         case "DELETE_TASK":
-            deleteTask(payload.id);
+            deleteTask(tasks, payload.id);
             return { ...contextData };
 
         default:
