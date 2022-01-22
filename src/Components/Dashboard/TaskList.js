@@ -72,7 +72,7 @@ const TaskList = ({
                         )}
                         {/* TASKS LIST */}
                         {taskData.length > 0 &&
-                            taskSearchData.map((task, idx) => (
+                            taskSearchData.reverse().map((task, idx) => (
                                 <React.Fragment key={`task-${idx}`}>
                                     <div className="task py-2 px-1 w-100 d-flex align-items-center justify-content-between">
                                         <Checkbox

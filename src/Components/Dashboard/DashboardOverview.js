@@ -52,7 +52,6 @@ const DashboardOverview = ({ taskData }) => {
                             <ul className="pl-3">
                                 {taskData
                                     ?.slice(Math.max(taskData.length - 4, 0))
-                                    ?.reverse()
                                     ?.map((task, idx) => (
                                         <React.Fragment
                                             key={`task-list-${idx}`}
@@ -85,8 +84,16 @@ const DashboardOverview = ({ taskData }) => {
                                         dataKey="value"
                                         data={chartData}
                                         fill="#5285EC"
-                                        label
+                                        // label
                                     />
+                                    <text
+                                        x={0}
+                                        y={0}
+                                        textAnchor={"middle"}
+                                        fill="#999"
+                                    >
+                                        {`Completed`}
+                                    </text>
                                 </PieChart>
                             </ResponsiveContainer>
                         </div>
